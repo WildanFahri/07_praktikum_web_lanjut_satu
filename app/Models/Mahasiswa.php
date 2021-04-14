@@ -27,4 +27,8 @@ class Mahasiswa extends Model //Definisi Model
         'Email',
         'Tanggal_Lahir',
     ];
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 };
