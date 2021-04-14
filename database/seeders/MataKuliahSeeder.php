@@ -14,8 +14,7 @@ class MataKuliahSeeder extends Seeder
      */
     public function run()
     {
-        //eksekusi MataKuliahSeeder
-        //Commit Praktikum 9: ORM dengan relasi
+
         $matkul = [
             [
                 'nama_matkul' => 'Pemrograman Berbasis Objek',
