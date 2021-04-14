@@ -33,7 +33,14 @@
             </div>
             <div class="form-group">
                 <label for="Kelas">Kelas</label><br>
-                <input type="Kelas" name="Kelas" class="formcontrol" id="Kelas" value="{{ $Mahasiswa->Kelas }}" ariadescribedby="Kelas" >
+                <select type="Kelas" name="Kelas" class="form-control" id="Kelas">
+                    <option selected disabled>Pilih Kelas</option>
+                    @foreach ($Kelas as $kls)
+                        <option value="{{ $kls->id }}"
+                            {{ $Mahasiswa->Kelas->id === $kls->id ? 'selected' : '' }}>
+                            {{ $kls->nama_kelas }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="Jurusan">Jurusan</label><br>
