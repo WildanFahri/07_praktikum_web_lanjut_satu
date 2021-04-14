@@ -87,9 +87,21 @@ class MahasiswaController extends Controller
             'Email' => 'required',
             'Tanggal_Lahir' => 'required',
         ]);
-    //fungsi eloquent untuk mengupdate data inputan kita
-        Mahasiswa::find($Nim)->update($request->all());
+    //fungsi eloquent untuk menyimpan data mahasiswa
+    $Mahasiswa = Mahasiswa::with('Kelas')->where('Nim', $Nim)->first();
+    $Mahasiswa->Nim = $request->get('Nim');
+    $Mahasiswa->Nama = $request->get('Nama');
+    $Mahasiswa->Jurusan = $request->get('Jurusan');
+    $Mahasiswa->No_Handphone = $request->get('No_Handphone');
+    $Mahasiswa->Email = $request->get('Email');
+    $Mahasiswa->Tanggal_Lahir = $request->get('Tanggal_Lahir');
+    $Mahasiswa->save();
 
+    $Kelas = new Kelas;
+    $Kelas->id = $request->get('Kelas');
+
+    $Mahasiswa->Kelas()->associate($Kelas); // FUngsi eloquent untuk menyimpan belongTo
+    $Mahasiswa->save();
     //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswas.index')
             ->with('success', 'Mahasiswa Berhasil Diupdate');
