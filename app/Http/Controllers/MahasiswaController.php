@@ -38,8 +38,22 @@ class MahasiswaController extends Controller
             'Tanggal_Lahir' => 'required',
         ]);
 
-        //fungsi eloquent untuk menambah data
-        Mahasiswa::create($request->all());
+        $Kelas = Kelas::find($request->get('Kelas'));
+
+        //fungsi eloquent untuk menyimpan data mahasiswa
+        $Mahasiswa = new Mahasiswa();
+        $Mahasiswa->Nim = $request->get('Nim');
+        $Mahasiswa->Nama = $request->get('Nama');
+        $Mahasiswa->Jurusan = $request->get('Jurusan');
+        $Mahasiswa->No_Handphone = $request->get('No_Handphone');
+        $Mahasiswa->Email = $request->get('Email');
+        $Mahasiswa->Tanggal_Lahir = $request->get('Tanggal_Lahir');
+
+        $Kelas = new Kelas;
+        $Kelas->id = $request->get('Kelas');
+
+        $Mahasiswa->Kelas()->associate($Kelas); // FUngsi eloquent untuk menyimpan belongTo
+        $Mahasiswa->save();
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswas.index')
