@@ -31,6 +31,6 @@ class CreateMatakuliahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matakuliah_matakuliah');
+        Schema::dropIfExists('mahasiswa_matakuliah');
     }
 }
